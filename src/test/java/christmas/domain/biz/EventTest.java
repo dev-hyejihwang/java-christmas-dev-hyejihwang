@@ -31,4 +31,16 @@ class EventTest {
         assertThat(event.checkDDay(visitDate)).isEqualTo(0);
     }
 
+    @DisplayName("입력한 날짜가 평일인 경우 true, 아닌 경우 false를 리턴한다.")
+    @Test
+    void 평일_날짜_테스트(){
+        Event event = new Event();
+
+        int visitDate = 26;
+        assertThat(event.checkWeekDay(visitDate)).isTrue();
+
+        visitDate = 10;
+        assertThat(event.checkWeekDay(visitDate)).isFalse();
+    }
+
 }
