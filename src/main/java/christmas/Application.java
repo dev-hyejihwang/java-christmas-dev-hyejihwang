@@ -16,8 +16,6 @@ public class Application {
         date.confirmDate(visitDate);
 
         Event event = new Event();
-        int dDayDCPrice = event.checkDDay(visitDate);
-        boolean weekDayYn = event.checkWeekDay(visitDate);
-        boolean specialDayYn = event.checkSpecialDay(visitDate);
+        event.checkEvent(visitDate);
     }
 }
