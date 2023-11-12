@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.domain.biz.Date;
+import christmas.domain.biz.Event;
 import christmas.domain.ui.InputView;
 
 public class Application {
@@ -13,6 +14,10 @@ public class Application {
         Date date = new Date();
         int visitDate = date.validateDate(inputDate);
         date.confirmDate(visitDate);
+
+        Event event = new Event();
+        int dDayDCPrice = event.checkDDay(visitDate);
+        
 
     }
 }
