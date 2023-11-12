@@ -2,7 +2,10 @@ package christmas;
 
 import christmas.domain.biz.Date;
 import christmas.domain.biz.Event;
+import christmas.domain.biz.Order;
 import christmas.domain.ui.InputView;
+
+import java.util.Map;
 
 public class Application {
     public static void main(String[] args) {
@@ -19,5 +22,8 @@ public class Application {
         event.checkEvent(visitDate);
 
         String inputMenu = inputView.readMenu();
+        Order order = new Order();
+        Map<String, Integer> orderMenu = order.validateForm(inputMenu);
+        order.validateMenu(orderMenu);
     }
 }
