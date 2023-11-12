@@ -1,6 +1,7 @@
 package christmas.domain.biz;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Event {
 
@@ -15,6 +16,14 @@ public class Event {
 
     public boolean checkWeekDay(int visitDate){
         if(visitDate % 7 == 4 || visitDate % 7 == 5 || visitDate % 7 == 6 ||visitDate % 7 == 0 ){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkSpecialDay(int visitDate){
+        List<Integer> specialDays = Arrays.asList(3,10,17,24,25,31);
+        if(specialDays.contains(visitDate)){
             return true;
         }
         return false;

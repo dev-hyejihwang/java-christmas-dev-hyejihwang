@@ -43,4 +43,16 @@ class EventTest {
         assertThat(event.checkWeekDay(visitDate)).isFalse();
     }
 
+    @DisplayName("입력한 날짜가 특별 일자인 경우 true, 아닌 경우 false를 리턴한다.")
+    @Test
+    void 특별_날짜_테스트(){
+        Event event = new Event();
+
+        int visitDate = 10;
+        assertThat(event.checkSpecialDay(visitDate)).isTrue();
+
+        visitDate = 29;
+        assertThat(event.checkSpecialDay(visitDate)).isFalse();
+    }
+
 }

@@ -18,5 +18,6 @@ public class Application {
         Event event = new Event();
         int dDayDCPrice = event.checkDDay(visitDate);
         boolean weekDayYn = event.checkWeekDay(visitDate);
+        boolean specialDayYn = event.checkSpecialDay(visitDate);
     }
 }
