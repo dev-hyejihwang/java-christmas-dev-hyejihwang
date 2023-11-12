@@ -17,7 +17,7 @@ public class Application {
 
         Event event = new Event();
         int dDayDCPrice = event.checkDDay(visitDate);
-        
+
 
     }
 }
