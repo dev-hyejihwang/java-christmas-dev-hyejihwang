@@ -17,5 +17,7 @@ public class Application {
 
         Event event = new Event();
         event.checkEvent(visitDate);
+
+        String inputMenu = inputView.readMenu();
     }
 }
