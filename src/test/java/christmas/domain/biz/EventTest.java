@@ -61,6 +61,7 @@ class EventTest {
         Event event = new Event();
 
         event.checkEvent(10);
+        //TODO 테스트 구현
     }
 
 }
