@@ -9,10 +9,10 @@ public class Application {
 
         InputView inputView = new InputView();
         String inputDate = inputView.readDate();
-        System.out.println("입력받은 날짜:" +inputDate);
 
         Date date = new Date();
-        date.validateDate(inputDate);
+        int visitDate = date.validateDate(inputDate);
+        date.confirmDate(visitDate);
 
     }
 }
