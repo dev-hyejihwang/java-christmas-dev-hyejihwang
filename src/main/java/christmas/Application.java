@@ -4,6 +4,7 @@ import christmas.domain.biz.Date;
 import christmas.domain.biz.Event;
 import christmas.domain.biz.Order;
 import christmas.domain.ui.InputView;
+import christmas.domain.ui.OutputView;
 
 import java.util.Map;
 
@@ -26,5 +27,10 @@ public class Application {
         Map<String, Integer> orderMenus = order.validateForm(inputMenu);
         order.validateMenu(orderMenus);
         order.validateMenuCount(orderMenus);
+
+        System.out.println("12월 " + visitDate + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        OutputView outputView = new OutputView();
+        outputView.printOrderPrice(orderMenus);
+
     }
 }

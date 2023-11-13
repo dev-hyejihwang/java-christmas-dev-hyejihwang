@@ -1,6 +1,8 @@
 package christmas.domain.ui;
 
 
+import java.util.Map;
+
 public class OutputView {
 
     public void notifyDDayEvent(int dDayDCPrice){
@@ -19,6 +21,13 @@ public class OutputView {
     public void notifySpecialDayEvent(boolean specialDayYN){
         if(specialDayYN){
             System.out.println("특별할인 총 주문금액에서 1,000원 할인!");
+        }
+    }
+
+    public void printOrderPrice(Map<String,Integer> orderMenus){
+        System.out.println("<주문 메뉴>");
+        for (String orderMenu : orderMenus.keySet()) {
+            System.out.println(orderMenu + " " + orderMenus.get(orderMenu) +"개");
         }
     }
 }
