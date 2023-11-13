@@ -2,6 +2,7 @@ package christmas;
 
 import christmas.domain.biz.Date;
 import christmas.domain.biz.Event;
+import christmas.domain.biz.Gift;
 import christmas.domain.biz.Order;
 import christmas.domain.ui.InputView;
 import christmas.domain.ui.OutputView;
@@ -32,6 +33,9 @@ public class Application {
         OutputView outputView = new OutputView();
         outputView.printOrderMenu(orderMenus);
         outputView.printOrderPrice(orderMenus);
+
+        Gift gift = new Gift();
+        gift.checkGift(orderMenus);
 
     }
 }

@@ -33,7 +33,7 @@ public class OutputView {
         }
     }
 
-    public void printOrderPrice(Map<String, Integer> orderMenus){
+    public int printOrderPrice(Map<String, Integer> orderMenus){
         //TODO 3depth 확인
         System.out.println("<할인 전 총주문 금액>");
         int totalPrice = 0;
@@ -47,5 +47,6 @@ public class OutputView {
             }
         }
         System.out.println(totalPrice+"원");
+        return totalPrice;
     }
 }
