@@ -37,5 +37,7 @@ public class Application {
         Gift gift = new Gift();
         gift.checkGift(orderMenus);
 
+        outputView.printBenefit(orderMenus, visitDate);
+
     }
 }

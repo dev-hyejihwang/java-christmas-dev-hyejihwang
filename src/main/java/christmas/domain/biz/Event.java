@@ -20,7 +20,7 @@ public class Event {
         outputView.notifySpecialDayEvent(specialDayYn);
     }
 
-    private int checkDDay(int visitDate){
+    public int checkDDay(int visitDate){
         int dcPrice = 0;
         if(visitDate > 25){
             return dcPrice;
@@ -29,14 +29,14 @@ public class Event {
         return dcPrice;
     }
 
-    private boolean checkWeekDay(int visitDate){
+    public boolean checkWeekDay(int visitDate){
         if(visitDate % 7 == 4 || visitDate % 7 == 5 || visitDate % 7 == 6 ||visitDate % 7 == 0 ){
             return true;
         }
         return false;
     }
 
-    private boolean checkSpecialDay(int visitDate){
+    public boolean checkSpecialDay(int visitDate){
         List<Integer> specialDays = Arrays.asList(3,10,17,24,25,31);
         if(specialDays.contains(visitDate)){
             return true;
