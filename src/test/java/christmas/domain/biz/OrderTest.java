@@ -51,4 +51,16 @@ class OrderTest {
 
         assertThrows(IllegalArgumentException.class,() -> order.validateMenu(orderMenus));
     }
+
+    @DisplayName("총 주문 메뉴 수량이 20개가 넘는 경우 예외가 발생한다.")
+    @Test
+    void 메뉴_수량_예외_테스트(){
+        Map<String, Integer> orderMenus = new HashMap<>();
+        orderMenus.put("오일파스타",20);
+        orderMenus.put("딸기케이크",1);
+
+        Order order = new Order();
+
+        assertThrows(IllegalArgumentException.class,() -> order.validateMenuCount(orderMenus));
+    }
 }

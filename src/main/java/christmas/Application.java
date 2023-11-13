@@ -23,7 +23,8 @@ public class Application {
 
         String inputMenu = inputView.readMenu();
         Order order = new Order();
-        Map<String, Integer> orderMenu = order.validateForm(inputMenu);
-        order.validateMenu(orderMenu);
+        Map<String, Integer> orderMenus = order.validateForm(inputMenu);
+        order.validateMenu(orderMenus);
+        order.validateMenuCount(orderMenus);
     }
 }

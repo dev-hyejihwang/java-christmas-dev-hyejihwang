@@ -32,7 +32,7 @@ public class Order {
         for (String orderMenu : orderMenus.keySet()) {
             boolean menuExistYN = false;
             for (Menu menu : Menu.values()) {
-                if(orderMenu == menu.getMenuName()){
+                if(orderMenu.equals(menu.getMenuName())){
                     menuExistYN = true;
                     break;
                 }
@@ -49,8 +49,16 @@ public class Order {
         }
     }
 
-    public void validateMenuCount(){
-        //TODO 주문 메뉴 수량 검증
+    public void validateMenuCount(Map<String, Integer> orderMenus){
+        int orderCountSum = 0;
+        for (String orderMenu : orderMenus.keySet()) {
+            Integer orderCount = orderMenus.get(orderMenu);
+            orderCountSum += orderCount;
+        }
+
+        if(orderCountSum > 20) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 최대 20개까지 주문 가능합니다. 다시 입력해주세요.");
+        }
     }
 
 }
