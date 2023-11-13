@@ -24,7 +24,7 @@ public class OutputView {
         }
     }
 
-    public void printOrderPrice(Map<String,Integer> orderMenus){
+    public void printOrderMenu(Map<String,Integer> orderMenus){
         System.out.println("<주문 메뉴>");
         for (String orderMenu : orderMenus.keySet()) {
             System.out.println(orderMenu + " " + orderMenus.get(orderMenu) +"개");
