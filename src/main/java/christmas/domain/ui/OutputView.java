@@ -1,6 +1,8 @@
 package christmas.domain.ui;
 
 
+import christmas.domain.biz.Menu;
+
 import java.util.Map;
 
 public class OutputView {
@@ -29,5 +31,21 @@ public class OutputView {
         for (String orderMenu : orderMenus.keySet()) {
             System.out.println(orderMenu + " " + orderMenus.get(orderMenu) +"개");
         }
+    }
+
+    public void printOrderPrice(Map<String, Integer> orderMenus){
+        //TODO 3depth 확인
+        System.out.println("<할인 전 총주문 금액>");
+        int totalPrice = 0;
+        int orderPrice = 0;
+        for (String orderMenu : orderMenus.keySet()) {
+            for (Menu menu : Menu.values()) {
+                if(orderMenu.equals(menu.getMenuName())){
+                    orderPrice = menu.getPrice();
+                    totalPrice += orderPrice * orderMenus.get(orderMenu);
+                }
+            }
+        }
+        System.out.println(totalPrice+"원");
     }
 }
