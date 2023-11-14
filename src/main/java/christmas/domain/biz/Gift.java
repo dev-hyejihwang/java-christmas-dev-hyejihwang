@@ -5,11 +5,9 @@ import christmas.domain.ui.OutputView;
 import java.util.Map;
 
 public class Gift {
-    public void checkGift(Map<String, Integer> orderMenus){
-        OutputView outputView = new OutputView();
-        int orderPrice = outputView.printOrderPrice(orderMenus);
+    public void checkGift(Map<String, Integer> orderMenus, int totalOrderPrice){
 
-        if(orderPrice > 120000){
+        if(totalOrderPrice > 120000){
             System.out.println("<증정 메뉴>");
             System.out.println("샴페인 1개");
         }

@@ -17,13 +17,13 @@ public class Application {
         Order order = new Order();
         Map<String, Integer> orderMenus = order.process();
 
-        System.out.println("12월 " + visitDate + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+        System.out.println("\n12월 " + visitDate + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         OutputView outputView = new OutputView();
         outputView.printOrderMenu(orderMenus);
-        outputView.printOrderPrice(orderMenus);
+        int totalOrderPrice = outputView.printOrderPrice(orderMenus);
 
         Gift gift = new Gift();
-        gift.checkGift(orderMenus);
+        gift.checkGift(orderMenus, totalOrderPrice);
 
         int totalBenefit = outputView.printBenefit(orderMenus, visitDate);
 

@@ -4,13 +4,15 @@ package christmas.domain.ui;
 import christmas.domain.biz.Event;
 import christmas.domain.biz.Menu;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public class OutputView {
 
     public void printDDayEvent(int dDayDCPrice){
+        DecimalFormat format = new DecimalFormat("###,###");
         System.out.println("방문하시는 날짜에 진행하는 이벤트 안내드립니다. (10,000원 이상 구매시 적용)");
-        System.out.println("총 구매금액에서 " + dDayDCPrice + "원 할인!");
+        System.out.println("총 구매금액에서 " + format.format(dDayDCPrice) + "원 할인!");
     }
 
     public void printWeekDayEvent(boolean weekDayYN){
@@ -28,26 +30,33 @@ public class OutputView {
     }
 
     public void printOrderMenu(Map<String,Integer> orderMenus){
-        System.out.println("<주문 메뉴>");
+        System.out.println("\n<주문 메뉴>");
         for (String orderMenu : orderMenus.keySet()) {
             System.out.println(orderMenu + " " + orderMenus.get(orderMenu) +"개");
         }
+        System.out.println();
     }
 
     public int printOrderPrice(Map<String, Integer> orderMenus){
-        //TODO 3depth 확인
+        DecimalFormat format = new DecimalFormat("###,###");
         System.out.println("<할인 전 총주문 금액>");
         int totalPrice = 0;
-        int orderPrice = 0;
         for (String orderMenu : orderMenus.keySet()) {
-            for (Menu menu : Menu.values()) {
-                if(orderMenu.equals(menu.getMenuName())){
-                    orderPrice = menu.getPrice();
-                    totalPrice += orderPrice * orderMenus.get(orderMenu);
-                }
+            totalPrice = getTotalPrice(orderMenus, totalPrice, orderMenu);
+        }
+        System.out.println(format.format(totalPrice)+"원");
+        System.out.println();
+        return totalPrice;
+    }
+
+    private int getTotalPrice(Map<String, Integer> orderMenus, int totalPrice, String orderMenu) {
+        int orderPrice;
+        for (Menu menu : Menu.values()) {
+            if(orderMenu.equals(menu.getMenuName())){
+                orderPrice = menu.getPrice();
+                totalPrice += orderPrice * orderMenus.get(orderMenu);
             }
         }
-        System.out.println(totalPrice+"원");
         return totalPrice;
     }
 
