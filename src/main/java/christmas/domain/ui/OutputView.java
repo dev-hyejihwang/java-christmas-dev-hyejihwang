@@ -107,4 +107,10 @@ public class OutputView {
 
         return totalBenefit;
     }
+
+    public void printBadge(String badgeName){
+        System.out.println("혜택 금액 별 배지가 부여되며 새해 이벤트에 활용됩니다!");
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(badgeName);
+    }
 }

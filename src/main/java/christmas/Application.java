@@ -37,7 +37,9 @@ public class Application {
         int totalBenefit = outputView.printBenefit(orderMenus, visitDate);
 
         Badge badge = new Badge();
-        badge.giveBadge(totalBenefit);
+        String badgeName = badge.giveBadge(totalBenefit);
+
+        outputView.printBadge(badgeName);
 
     }
 }
