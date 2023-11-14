@@ -15,9 +15,7 @@ class DateTest extends NsTest {
     @Test
     void 숫자_예외_테스트(){
         assertSimpleTest(() -> {
-            Date date = new Date();
-            String notNumber = "number";
-            date.validateDate(notNumber);
+            runException("number");
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
@@ -26,15 +24,15 @@ class DateTest extends NsTest {
     @Test
     void 날짜_범위_예외_테스트(){
         assertSimpleTest(() -> {
-            Date date = new Date();
-            String number = "52";
-            date.validateDate(number);
+            runException("52");
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
 
     @Override
     protected void runMain() {
+        Date date = new Date();
+        date.getDate();
     }
 
 }

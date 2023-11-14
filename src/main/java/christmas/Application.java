@@ -8,14 +8,8 @@ import java.util.Map;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
-
-        InputView inputView = new InputView();
-        String inputDate = inputView.readDate();
-
         Date date = new Date();
-        int visitDate = date.validateDate(inputDate);
-        date.confirmDate(visitDate);
+        int visitDate = date.getDate();
 
         Event event = new Event();
         event.checkEvent(visitDate);
@@ -37,6 +31,5 @@ public class Application {
         String badgeName = badge.giveBadge(totalBenefit);
 
         outputView.printBadge(badgeName);
-
     }
 }
