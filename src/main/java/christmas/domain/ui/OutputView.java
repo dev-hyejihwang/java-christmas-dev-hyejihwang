@@ -8,12 +8,12 @@ import java.util.Map;
 
 public class OutputView {
 
-    public void notifyDDayEvent(int dDayDCPrice){
+    public void printDDayEvent(int dDayDCPrice){
         System.out.println("방문하시는 날짜에 진행하는 이벤트 안내드립니다. (10,000원 이상 구매시 적용)");
         System.out.println("총 구매금액에서 " + dDayDCPrice + "원 할인!");
     }
 
-    public void notifyWeekDayEvent(boolean weekDayYN){
+    public void printWeekDayEvent(boolean weekDayYN){
         if(weekDayYN){
             System.out.println("디저트 메뉴 1개당 2,023원 할인!");
             return;
@@ -21,7 +21,7 @@ public class OutputView {
         System.out.println("메인 메뉴 1개당 2,023원 할인!");
     }
 
-    public void notifySpecialDayEvent(boolean specialDayYN){
+    public void printSpecialDayEvent(boolean specialDayYN){
         if(specialDayYN){
             System.out.println("특별할인 총 주문금액에서 1,000원 할인!");
         }
@@ -56,13 +56,13 @@ public class OutputView {
         int totalBenefit = 0;
         System.out.println("<혜택 내역>");
         Event event = new Event();
-        int dDayBenefit = event.checkDDay(visitDate);
+        int dDayBenefit = event.checkDDayEvent(visitDate);
         if(dDayBenefit > 0){
             totalBenefit += dDayBenefit;
             System.out.println("크리스마스 디데이 할인: -" + dDayBenefit + "원");
         }
 
-        boolean weekDayYN = event.checkWeekDay(visitDate);
+        boolean weekDayYN = event.checkWeekDayEvent(visitDate);
         int weekDayBenefit = 0;
         int weekendBenefit = 0;
 
@@ -91,7 +91,7 @@ public class OutputView {
             }
         }
 
-        boolean specialDayYN = event.checkSpecialDay(visitDate);
+        boolean specialDayYN = event.checkSpecialDayEvent(visitDate);
         if(specialDayYN){
             totalBenefit += 1000;
             System.out.println("특별 할인: -1000원");
