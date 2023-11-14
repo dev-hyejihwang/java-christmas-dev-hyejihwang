@@ -1,30 +1,45 @@
 package christmas.domain.biz;
 
+import christmas.domain.ui.InputView;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Order {
 
-    public Map<String,Integer> validateForm(String inputMenu) {
-        try{
-            List<String> inputMenus = List.of(inputMenu.split(","));
-            Map<String, Integer> orderMenu = new HashMap<>();
-            for (String menu : inputMenus) {
-                List<String> tempMenu = List.of(menu.split("-"));
+    public Map<String, Integer> process(){
+        Map<String, Integer> orderMenus = validateForm();
+        validateMenu(orderMenus);
+        validateMenuCount(orderMenus);
+        return orderMenus;
+    }
 
-                if(orderMenu.containsKey(tempMenu.get(0))){
-                    throw new IllegalArgumentException();
+    public Map<String,Integer> validateForm() {
+        InputView inputView = new InputView();
+        Map<String, Integer> orderMenu = new HashMap<>();
+        while(true){
+            try{
+                String inputMenu = inputView.readMenu();
+                List<String> inputMenus = List.of(inputMenu.split(","));
+
+                for (String menu : inputMenus) {
+                    List<String> tempMenu = List.of(menu.split("-"));
+
+                    if(orderMenu.containsKey(tempMenu.get(0))){
+                        throw new IllegalArgumentException();
+                    }
+                    orderMenu.put(tempMenu.get(0),Integer.parseInt(tempMenu.get(1)));
                 }
-                orderMenu.put(tempMenu.get(0),Integer.parseInt(tempMenu.get(1)));
-            }
+                break;
 
-            return orderMenu;
-        }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-        }catch (IndexOutOfBoundsException e){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }catch (IllegalArgumentException e){
+                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }catch (IndexOutOfBoundsException e){
+                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
         }
+        return orderMenu;
     }
 
     public void validateMenu(Map<String, Integer> orderMenus){
@@ -39,12 +54,7 @@ public class Order {
             }
 
             if(!menuExistYN){
-                for (Menu menu : Menu.values()) {
-                    //TODO 출력 양식 확인
-                    System.out.println("<" + menu.getTypeName() + ">");
-                    System.out.println(" - " + menu.getMenuName() + " : " + menu.getPrice() + "원") ;
-                }
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
         }
     }
@@ -57,7 +67,7 @@ public class Order {
         }
 
         if(orderCountSum > 20) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 최대 20개까지 주문 가능합니다. 다시 입력해주세요.");
+            System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 

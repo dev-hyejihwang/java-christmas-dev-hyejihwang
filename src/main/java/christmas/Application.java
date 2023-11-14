@@ -20,11 +20,8 @@ public class Application {
         Event event = new Event();
         event.checkEvent(visitDate);
 
-        String inputMenu = inputView.readMenu();
         Order order = new Order();
-        Map<String, Integer> orderMenus = order.validateForm(inputMenu);
-        order.validateMenu(orderMenus);
-        order.validateMenuCount(orderMenus);
+        Map<String, Integer> orderMenus = order.process();
 
         System.out.println("12월 " + visitDate + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
         OutputView outputView = new OutputView();

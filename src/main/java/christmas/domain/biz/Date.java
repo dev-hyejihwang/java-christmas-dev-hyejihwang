@@ -12,8 +12,9 @@ public class Date {
 
             return date;
         }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
+        return 0;
     }
 
     public void confirmDate(int visitDate){
