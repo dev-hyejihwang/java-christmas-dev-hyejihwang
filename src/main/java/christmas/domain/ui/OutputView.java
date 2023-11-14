@@ -51,7 +51,7 @@ public class OutputView {
         return totalPrice;
     }
 
-    public void printBenefit(Map<String, Integer> orderMenus, int visitDate){
+    public int printBenefit(Map<String, Integer> orderMenus, int visitDate){
         //TODO 함수 분리 및 출력 양식 확인
         int totalBenefit = 0;
         System.out.println("<혜택 내역>");
@@ -105,5 +105,12 @@ public class OutputView {
         System.out.println("<할인 후 예상 결제 금액>");
         System.out.println(orderPrice - totalBenefit + "원");
 
+        return totalBenefit;
+    }
+
+    public void printBadge(String badgeName){
+        System.out.println("혜택 금액 별 배지가 부여되며 새해 이벤트에 활용됩니다!");
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(badgeName);
     }
 }
