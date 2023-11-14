@@ -80,11 +80,15 @@ public class OutputView {
         }
 
         if(weekDayYN){
-            totalBenefit += weekDayBenefit;
-            System.out.println("평일 할인: -" + weekDayBenefit + "원");
+            if(weekDayBenefit >0){
+                totalBenefit += weekDayBenefit;
+                System.out.println("평일 할인: -" + weekDayBenefit + "원");
+            }
         }else{
-            totalBenefit += weekendBenefit;
-            System.out.println("주말 할인: -" + weekendBenefit + "원");
+            if(weekendBenefit >0){
+                totalBenefit += weekendBenefit;
+                System.out.println("주말 할인: -" + weekendBenefit + "원");
+            }
         }
 
         boolean specialDayYN = event.checkSpecialDay(visitDate);
@@ -93,11 +97,16 @@ public class OutputView {
             System.out.println("특별 할인: -1000원");
         }
 
+        if(totalBenefit < 1){
+            System.out.println("없음");
+        }
+
         int orderPrice = printOrderPrice(orderMenus);
         if(orderPrice > 120000){
             totalBenefit += 25000;
             System.out.println("증정 이벤트: -25000원");
         }
+
 
         System.out.println("<총혜택 금액>");
         System.out.println("-" + totalBenefit + "원");
