@@ -1,9 +1,6 @@
 package christmas;
 
-import christmas.domain.biz.Date;
-import christmas.domain.biz.Event;
-import christmas.domain.biz.Gift;
-import christmas.domain.biz.Order;
+import christmas.domain.biz.*;
 import christmas.domain.ui.InputView;
 import christmas.domain.ui.OutputView;
 
@@ -37,7 +34,10 @@ public class Application {
         Gift gift = new Gift();
         gift.checkGift(orderMenus);
 
-        outputView.printBenefit(orderMenus, visitDate);
+        int totalBenefit = outputView.printBenefit(orderMenus, visitDate);
+
+        Badge badge = new Badge();
+        badge.giveBadge(totalBenefit);
 
     }
 }
