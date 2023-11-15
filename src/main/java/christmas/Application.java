@@ -25,7 +25,8 @@ public class Application {
         Gift gift = new Gift();
         gift.checkGift(totalOrderPrice);
 
-        int totalBenefit = outputView.printBenefit(orderMenus, visitDate);
+        Benefit benefit = new Benefit();
+        int totalBenefit = benefit.process(orderMenus, visitDate);
 
         Badge badge = new Badge();
         String badgeName = badge.giveBadge(totalBenefit);

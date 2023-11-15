@@ -74,4 +74,14 @@ public class Order {
         }
     }
 
+    public int getTotalPrice(String orderMenu, Integer orderCount) {
+        int totalPrice = 0;
+        for (Menu menu : Menu.values()) {
+            if(orderMenu.equals(menu.getMenuName())){
+                int orderPrice = menu.getPrice();
+                totalPrice += orderPrice * orderCount;
+            }
+        }
+        return totalPrice;
+    }
 }
