@@ -1,7 +1,6 @@
 package christmas;
 
 import christmas.domain.biz.*;
-import christmas.domain.ui.InputView;
 import christmas.domain.ui.OutputView;
 
 import java.util.Map;
@@ -29,8 +28,6 @@ public class Application {
         int totalBenefit = benefit.process(orderMenus, visitDate);
 
         Badge badge = new Badge();
-        String badgeName = badge.giveBadge(totalBenefit);
-
-        outputView.printBadge(badgeName);
+        badge.giveBadge(totalBenefit);
     }
 }

@@ -35,7 +35,7 @@ public class Benefit {
         totalBenefit += printSpecialDayEvent(visitDate, totalBenefit);
 
         if(totalBenefit < 1){
-            outputView.printNoting();
+            System.out.println("없음");
         }
 
         return totalBenefit;

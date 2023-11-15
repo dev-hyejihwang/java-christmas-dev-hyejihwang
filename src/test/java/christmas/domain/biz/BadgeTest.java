@@ -1,25 +1,31 @@
 package christmas.domain.biz;
 
-import org.assertj.core.api.Assertions;
+import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class BadgeTest {
+class BadgeTest extends NsTest {
 
     @DisplayName("혜택 금액에 따라 배지를 부여받는다.")
     @Test
     void 배지_부여_테스트(){
-        Badge badge = new Badge();
-        String badgeName = badge.giveBadge(20000);
-        Assertions.assertThat(badgeName).isEqualTo("SANTA");
+        assertSimpleTest(() -> {
+            Badge badge = new Badge();
+            badge.giveBadge(20000);
+            assertThat(output()).contains("산타");
 
-        badgeName = badge.giveBadge(19999);
-        Assertions.assertThat(badgeName).isEqualTo("TREE");
+            badge.giveBadge(19999);
+            assertThat(output()).contains("트리");
 
-        badgeName = badge.giveBadge(4000);
-        Assertions.assertThat(badgeName).isEqualTo("NOTING");
+            badge.giveBadge(4000);
+            assertThat(output()).contains("별");
+        });
     }
 
+    @Override
+    protected void runMain() {
+    }
 }
