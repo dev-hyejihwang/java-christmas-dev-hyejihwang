@@ -1,125 +1,67 @@
 package christmas.domain.ui;
 
+import christmas.domain.biz.Order;
 
-import christmas.domain.biz.Event;
-import christmas.domain.biz.Menu;
-
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public class OutputView {
+    private DecimalFormat format = new DecimalFormat("###,###");
 
-    public void notifyDDayEvent(int dDayDCPrice){
+    public void printDDayEvent(int dDayDCPrice) {
         System.out.println("방문하시는 날짜에 진행하는 이벤트 안내드립니다. (10,000원 이상 구매시 적용)");
-        System.out.println("총 구매금액에서 " + dDayDCPrice + "원 할인!");
+        System.out.println("총 구매금액에서 " + format.format(dDayDCPrice) + "원 할인!");
     }
 
-    public void notifyWeekDayEvent(boolean weekDayYN){
-        if(weekDayYN){
+    public void printWeekDayEvent(boolean weekDayYN) {
+        if (weekDayYN) {
             System.out.println("디저트 메뉴 1개당 2,023원 할인!");
             return;
         }
         System.out.println("메인 메뉴 1개당 2,023원 할인!");
     }
 
-    public void notifySpecialDayEvent(boolean specialDayYN){
-        if(specialDayYN){
+    public void printSpecialDayEvent(boolean specialDayYN) {
+        if (specialDayYN) {
             System.out.println("특별할인 총 주문금액에서 1,000원 할인!");
         }
     }
 
-    public void printOrderMenu(Map<String,Integer> orderMenus){
-        System.out.println("<주문 메뉴>");
+    public void printOrderMenu(Map<String, Integer> orderMenus) {
+        System.out.println("\n<주문 메뉴>");
         for (String orderMenu : orderMenus.keySet()) {
-            System.out.println(orderMenu + " " + orderMenus.get(orderMenu) +"개");
+            System.out.println(orderMenu + " " + orderMenus.get(orderMenu) + "개");
         }
+        System.out.println();
     }
 
-    public int printOrderPrice(Map<String, Integer> orderMenus){
-        //TODO 3depth 확인
+    public int printOrderPrice(Map<String, Integer> orderMenus) {
+        Order order = new Order();
         System.out.println("<할인 전 총주문 금액>");
         int totalPrice = 0;
-        int orderPrice = 0;
         for (String orderMenu : orderMenus.keySet()) {
-            for (Menu menu : Menu.values()) {
-                if(orderMenu.equals(menu.getMenuName())){
-                    orderPrice = menu.getPrice();
-                    totalPrice += orderPrice * orderMenus.get(orderMenu);
-                }
-            }
+            totalPrice += order.getTotalPrice(orderMenu, orderMenus.get(orderMenu));
         }
-        System.out.println(totalPrice+"원");
+        System.out.println(format.format(totalPrice) + "원");
+        System.out.println();
         return totalPrice;
     }
 
-    public int printBenefit(Map<String, Integer> orderMenus, int visitDate){
-        //TODO 함수 분리 및 출력 양식 확인
-        int totalBenefit = 0;
-        System.out.println("<혜택 내역>");
-        Event event = new Event();
-        int dDayBenefit = event.checkDDay(visitDate);
-        if(dDayBenefit > 0){
-            totalBenefit += dDayBenefit;
-            System.out.println("크리스마스 디데이 할인: -" + dDayBenefit + "원");
-        }
-
-        boolean weekDayYN = event.checkWeekDay(visitDate);
-        int weekDayBenefit = 0;
-        int weekendBenefit = 0;
-
-        for (String orderMenu : orderMenus.keySet()) {
-            for (Menu menu : Menu.values()) {
-                if(orderMenu.equals(menu.getMenuName())){
-                    if("디저트".equals(menu.getTypeName())){
-                        weekDayBenefit += 2023;
-                    }
-                    if("메인".equals(menu.getTypeName())){
-                        weekendBenefit += 2023;
-                    }
-                }
-            }
-        }
-
-        if(weekDayYN){
-            if(weekDayBenefit >0){
-                totalBenefit += weekDayBenefit;
-                System.out.println("평일 할인: -" + weekDayBenefit + "원");
-            }
-        }else{
-            if(weekendBenefit >0){
-                totalBenefit += weekendBenefit;
-                System.out.println("주말 할인: -" + weekendBenefit + "원");
-            }
-        }
-
-        boolean specialDayYN = event.checkSpecialDay(visitDate);
-        if(specialDayYN){
-            totalBenefit += 1000;
-            System.out.println("특별 할인: -1000원");
-        }
-
-        if(totalBenefit < 1){
-            System.out.println("없음");
-        }
-
-        int orderPrice = printOrderPrice(orderMenus);
-        if(orderPrice > 120000){
-            totalBenefit += 25000;
-            System.out.println("증정 이벤트: -25000원");
-        }
-
-
-        System.out.println("<총혜택 금액>");
-        System.out.println("-" + totalBenefit + "원");
-
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.println(orderPrice - totalBenefit + "원");
-
-        return totalBenefit;
+    public void printTotalBenefitPrice(int totalBenefit) {
+        System.out.println("\n<총혜택 금액>");
+        System.out.println("-" + format.format(totalBenefit) + "원");
     }
 
-    public void printBadge(String badgeName){
-        System.out.println("혜택 금액 별 배지가 부여되며 새해 이벤트에 활용됩니다!");
-        System.out.println("<12월 이벤트 배지>");
-        System.out.println(badgeName);
+    public void printExpectPrice(int expectPrice) {
+        System.out.println("\n<할인 후 예상 결제 금액>");
+        System.out.println(format.format(expectPrice) + "원");
+    }
+
+    public void printWeekBenefitPrice(boolean weekDayYN, int weekBenefit) {
+        if (weekDayYN) {
+            System.out.println("평일 할인: -" + format.format(weekBenefit) + "원");
+            return;
+        }
+        System.out.println("주말 할인: -" + format.format(weekBenefit) + "원");
     }
 }

@@ -10,31 +10,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class DateTest extends NsTest {
-
     @DisplayName("숫자가 아닌 값을 입력하면 오류가 발생한다.")
     @Test
-    void 숫자_예외_테스트(){
+    void 숫자_예외_테스트() {
         assertSimpleTest(() -> {
-            Date date = new Date();
-            String notNumber = "number";
-            date.validateDate(notNumber);
+            runException("number");
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
 
     @DisplayName("1~31 이외의 숫자를 입력하면 오류가 발생한다.")
     @Test
-    void 날짜_범위_예외_테스트(){
+    void 날짜_범위_예외_테스트() {
         assertSimpleTest(() -> {
-            Date date = new Date();
-            String number = "52";
-            date.validateDate(number);
+            runException("52");
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
 
     @Override
     protected void runMain() {
+        Date date = new Date();
+        date.getDate();
     }
-
 }
