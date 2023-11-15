@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Order {
-
     public Map<String, Integer> process() {
         Map<String, Integer> orderMenus = validateForm();
         validateMenu(orderMenus);
@@ -35,7 +34,6 @@ public class Order {
     private static void organizeMenus(Map<String, Integer> orderMenu, List<String> inputMenus) {
         for (String menu : inputMenus) {
             List<String> tempMenu = List.of(menu.split("-"));
-
             if (orderMenu.containsKey(tempMenu.get(0))) {
                 throw new IllegalArgumentException();
             }
@@ -46,7 +44,6 @@ public class Order {
     private void validateMenu(Map<String, Integer> orderMenus) {
         for (String orderMenu : orderMenus.keySet()) {
             boolean menuExistYN = isMenuExistYN(orderMenu);
-
             if (!menuExistYN) {
                 System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
@@ -77,7 +74,7 @@ public class Order {
     public int getTotalPrice(String orderMenu, Integer orderCount) {
         int totalPrice = 0;
         for (Menu menu : Menu.values()) {
-            if(orderMenu.equals(menu.getMenuName())){
+            if (orderMenu.equals(menu.getMenuName())) {
                 int orderPrice = menu.getPrice();
                 totalPrice += orderPrice * orderCount;
             }

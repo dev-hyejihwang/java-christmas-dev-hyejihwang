@@ -3,10 +3,9 @@ package christmas.domain.biz;
 import christmas.domain.ui.InputView;
 
 public class Date {
-
     public int getDate() {
         InputView inputView = new InputView();
-        int date = 0;
+        int date;
         while (true) {
             try {
                 String inputDate = inputView.readDate();
