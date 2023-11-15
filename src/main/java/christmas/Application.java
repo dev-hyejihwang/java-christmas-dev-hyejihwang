@@ -23,7 +23,7 @@ public class Application {
         int totalOrderPrice = outputView.printOrderPrice(orderMenus);
 
         Gift gift = new Gift();
-        gift.checkGift(orderMenus, totalOrderPrice);
+        gift.checkGift(totalOrderPrice);
 
         int totalBenefit = outputView.printBenefit(orderMenus, visitDate);
 
