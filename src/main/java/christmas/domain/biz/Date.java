@@ -2,7 +2,14 @@ package christmas.domain.biz;
 
 import christmas.domain.ui.InputView;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 public class Date {
+
+    private static final int YEAR = 2023;
+    private static final int MONTH = 12;
+
     public int getDate() {
         InputView inputView = new InputView();
         int date;
@@ -20,7 +27,9 @@ public class Date {
     }
 
     private static void validateDate(int date) {
-        if (date < 1 || date > 31) {
+        try{
+            LocalDate.of(YEAR, MONTH, date);
+        }catch (DateTimeException e){
             throw new IllegalArgumentException();
         }
     }
