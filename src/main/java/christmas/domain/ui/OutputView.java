@@ -1,6 +1,7 @@
 package christmas.domain.ui;
 
 import christmas.domain.biz.Order;
+import christmas.vo.Badge;
 
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -63,5 +64,12 @@ public class OutputView {
             return;
         }
         System.out.println("주말 할인: -" + format.format(weekBenefit) + "원");
+    }
+
+    public void printBadge(int totalBenefit){
+        System.out.println("\n혜택 금액 별 배지가 부여되며 새해 이벤트에 활용됩니다!");
+        System.out.println("<12월 이벤트 배지>");
+        String badge = Badge.getBadge(totalBenefit);
+        System.out.println(badge);
     }
 }

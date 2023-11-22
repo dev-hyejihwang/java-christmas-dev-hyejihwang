@@ -2,6 +2,7 @@ package christmas;
 
 import christmas.domain.biz.*;
 import christmas.domain.ui.OutputView;
+import christmas.vo.Badge;
 
 import java.util.Map;
 
@@ -40,7 +41,10 @@ public class Application {
         Benefit benefit = new Benefit();
         int totalBenefit = benefit.process(orderMenus, visitDate);
 
-        Badge badge = new Badge();
-        badge.giveBadge(totalBenefit);
+//        Badge badge = new Badge();
+//        badge.giveBadge(totalBenefit);
+
+        outputView.printBadge(totalBenefit);
+
     }
 }

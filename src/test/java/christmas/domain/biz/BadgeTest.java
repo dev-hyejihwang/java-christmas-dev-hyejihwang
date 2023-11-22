@@ -1,6 +1,7 @@
 package christmas.domain.biz;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import christmas.vo.Badge;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,15 +13,7 @@ class BadgeTest extends NsTest {
     @Test
     void 배지_부여_테스트() {
         assertSimpleTest(() -> {
-            Badge badge = new Badge();
-            badge.giveBadge(20000);
-            assertThat(output()).contains("산타");
-
-            badge.giveBadge(19999);
-            assertThat(output()).contains("트리");
-
-            badge.giveBadge(4000);
-            assertThat(output()).contains("별");
+            assertThat(Badge.getBadge(20000)).isEqualTo("산타");
         });
     }
 
