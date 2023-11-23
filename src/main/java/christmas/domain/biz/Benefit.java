@@ -6,6 +6,10 @@ import java.text.DecimalFormat;
 import java.util.Map;
 
 public class Benefit {
+
+    private static final int WEEK_BENEFIT_AMOUNT = 2023;
+    private static final int SPECIAL_BENEFIT_AMOUNT = 1000;
+    private static final int GIFT_BENEFIT_AMOUNT = 120000;
     private final Event event = new Event();
     private final OutputView outputView = new OutputView();
     private final DecimalFormat format = new DecimalFormat("###,###");
@@ -53,7 +57,7 @@ public class Benefit {
         int weekBenefit = 0;
         for (String orderMenu : orderMenus.keySet()) {
             for (Menu menu : Menu.values()) {
-                weekBenefit = getWeekBenefit(weekDayYN, orderMenu, menu);
+                weekBenefit += getWeekBenefit(weekDayYN, orderMenu, menu);
             }
         }
 
@@ -69,13 +73,13 @@ public class Benefit {
         int weeKBenefit = 0;
         if (weekDayYN) {
             if ("디저트".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
-                weeKBenefit += 2023;
+                weeKBenefit += WEEK_BENEFIT_AMOUNT;
             }
             return weeKBenefit;
         }
 
         if ("메인".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
-            weeKBenefit += 2023;
+            weeKBenefit += WEEK_BENEFIT_AMOUNT;
         }
         return weeKBenefit;
     }
@@ -83,7 +87,7 @@ public class Benefit {
     private int printSpecialDayEvent(int visitDate, int totalBenefit) {
         boolean specialDayYN = event.checkSpecialDayEvent(visitDate);
         if (specialDayYN) {
-            totalBenefit += 1000;
+            totalBenefit += SPECIAL_BENEFIT_AMOUNT;
             System.out.println("특별 할인: -1,000원");
         }
         return totalBenefit;
@@ -91,7 +95,7 @@ public class Benefit {
 
     private int printGiftPrice(int orderPrice) {
         int giftPrice = 0;
-        if (orderPrice > 120000) {
+        if (orderPrice > GIFT_BENEFIT_AMOUNT) {
             System.out.println("증정 이벤트: -25,000원");
             return giftPrice;
         }
