@@ -1,7 +1,7 @@
 package christmas.domain.biz;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import christmas.vo.Badge;
+import christmas.domain.vo.Badge;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

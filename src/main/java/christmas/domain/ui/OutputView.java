@@ -1,7 +1,7 @@
 package christmas.domain.ui;
 
 import christmas.domain.biz.Order;
-import christmas.vo.Badge;
+import christmas.domain.vo.Badge;
 
 import java.text.DecimalFormat;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package christmas.vo;
+package christmas.domain.vo;
 
 public enum Badge {
 
