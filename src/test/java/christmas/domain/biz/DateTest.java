@@ -1,12 +1,10 @@
 package christmas.domain.biz;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import christmas.Application;
 import org.junit.jupiter.api.*;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class DateTest extends NsTest {

@@ -1,5 +1,6 @@
 package christmas.domain.biz;
 
+import christmas.domain.exception.DomainException;
 import christmas.domain.ui.InputView;
 
 import java.util.HashMap;
@@ -23,9 +24,9 @@ public class Order {
                 organizeMenus(orderMenu, inputMenus);
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                System.out.println(DomainException.getExceptionMessage("INVALID_ORDER"));
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                System.out.println(DomainException.getExceptionMessage("INVALID_ORDER"));
             }
         }
         return orderMenu;
@@ -45,7 +46,7 @@ public class Order {
         for (String orderMenu : orderMenus.keySet()) {
             boolean menuExistYN = isMenuExistYN(orderMenu);
             if (!menuExistYN) {
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                System.out.println(DomainException.getExceptionMessage("INVALID_ORDER"));
             }
         }
     }
@@ -67,7 +68,7 @@ public class Order {
         }
 
         if (orderCountSum > 20) {
-            System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            System.out.println(DomainException.getExceptionMessage("INVALID_ORDER"));
         }
     }
 

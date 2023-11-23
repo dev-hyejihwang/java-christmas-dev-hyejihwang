@@ -1,5 +1,6 @@
 package christmas.domain.biz;
 
+import christmas.domain.exception.DomainException;
 import christmas.domain.ui.InputView;
 
 import java.time.DateTimeException;
@@ -20,7 +21,7 @@ public class Date {
                 validateDate(date);
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+                System.out.println(DomainException.getExceptionMessage("INVALID_DATE"));
             }
         }
         return date;
