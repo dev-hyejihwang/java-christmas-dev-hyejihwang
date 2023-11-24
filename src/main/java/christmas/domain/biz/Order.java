@@ -3,6 +3,7 @@ package christmas.domain.biz;
 import christmas.domain.exception.DomainException;
 import christmas.domain.ui.InputView;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,20 +53,13 @@ public class Order {
     }
 
     private boolean isMenuExistYN(String orderMenu) {
-        for (Menu menu : Menu.values()) {
-            if (orderMenu.equals(menu.getMenuName())) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays.stream(Menu.values())
+                .anyMatch(menu -> orderMenu.equals(menu.getMenuName()));
     }
 
     private void validateMenuCount(Map<String, Integer> orderMenus) {
-        int orderCountSum = 0;
-        for (String orderMenu : orderMenus.keySet()) {
-            Integer orderCount = orderMenus.get(orderMenu);
-            orderCountSum += orderCount;
-        }
+        int orderCountSum = orderMenus.values()
+                .stream().mapToInt(Integer::intValue).sum();
 
         if (orderCountSum > 20) {
             System.out.println(DomainException.getExceptionMessage("INVALID_ORDER"));
@@ -73,13 +67,8 @@ public class Order {
     }
 
     public int getTotalPrice(String orderMenu, Integer orderCount) {
-        int totalPrice = 0;
-        for (Menu menu : Menu.values()) {
-            if (orderMenu.equals(menu.getMenuName())) {
-                int orderPrice = menu.getPrice();
-                totalPrice += orderPrice * orderCount;
-            }
-        }
-        return totalPrice;
+        return Arrays.stream(Menu.values())
+                .filter(menu -> orderMenu.equals(menu.getMenuName()))
+                .mapToInt(menu -> menu.getPrice()).sum();
     }
 }
