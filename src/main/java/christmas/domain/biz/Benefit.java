@@ -32,9 +32,9 @@ public class Benefit {
         int totalBenefit = 0;
 
         System.out.println("<혜택 내역>");
-        totalBenefit += printDDayEvent(visitDate, totalBenefit);
-        totalBenefit += printWeekDayEvent(orderMenus, visitDate, totalBenefit);
-        totalBenefit += printSpecialDayEvent(visitDate, totalBenefit);
+        totalBenefit += printDDayEvent(visitDate);
+        totalBenefit += printWeekDayEvent(orderMenus, visitDate);
+        totalBenefit += printSpecialDayEvent(visitDate);
 
         if (totalBenefit < 1) {
             System.out.println("없음");
@@ -43,16 +43,15 @@ public class Benefit {
         return totalBenefit;
     }
 
-    private int printDDayEvent(int visitDate, int totalBenefit) {
+    private int printDDayEvent(int visitDate) {
         int dDayBenefit = event.checkDDayEvent(visitDate);
         if (dDayBenefit > 0) {
-            totalBenefit += dDayBenefit;
             System.out.println("크리스마스 디데이 할인: -" + format.format(dDayBenefit) + "원");
         }
-        return totalBenefit;
+        return dDayBenefit;
     }
 
-    private int printWeekDayEvent(Map<String, Integer> orderMenus, int visitDate, int totalBenefit) {
+    private int printWeekDayEvent(Map<String, Integer> orderMenus, int visitDate) {
         boolean weekDayYN = event.checkWeekDayEvent(visitDate);
         int weekBenefit = 0;
         for (String orderMenu : orderMenus.keySet()) {
@@ -62,11 +61,10 @@ public class Benefit {
         }
 
         if (weekBenefit > 0) {
-            totalBenefit += weekBenefit;
             outputView.printWeekBenefitPrice(weekDayYN, weekBenefit);
         }
 
-        return totalBenefit;
+        return weekBenefit;
     }
 
     private int getWeekBenefit(boolean weekDayYN, String orderMenu, Menu menu) {
@@ -82,13 +80,13 @@ public class Benefit {
         return weeKBenefit;
     }
 
-    private int printSpecialDayEvent(int visitDate, int totalBenefit) {
+    private int printSpecialDayEvent(int visitDate) {
         boolean specialDayYN = event.checkSpecialDayEvent(visitDate);
         if (specialDayYN) {
-            totalBenefit += SPECIAL_BENEFIT_AMOUNT;
             System.out.println("특별 할인: -1,000원");
+            return SPECIAL_BENEFIT_AMOUNT;
         }
-        return totalBenefit;
+        return 0;
     }
 
     private int printGiftPrice(int orderPrice) {
