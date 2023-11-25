@@ -71,16 +71,14 @@ public class Benefit {
 
     private int getWeekBenefit(boolean weekDayYN, String orderMenu, Menu menu) {
         int weeKBenefit = 0;
-        if (weekDayYN) {
-            if ("디저트".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
-                weeKBenefit += WEEK_BENEFIT_AMOUNT;
-            }
-            return weeKBenefit;
-        }
-
-        if ("메인".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
+        if (weekDayYN && "디저트".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
             weeKBenefit += WEEK_BENEFIT_AMOUNT;
         }
+
+        if (!weekDayYN && "메인".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
+            weeKBenefit += WEEK_BENEFIT_AMOUNT;
+        }
+
         return weeKBenefit;
     }
 
