@@ -56,7 +56,7 @@ public class Benefit {
         int weekBenefit = 0;
         for (String orderMenu : orderMenus.keySet()) {
             for (Menu menu : Menu.values()) {
-                weekBenefit += getWeekBenefit(weekDayYN, orderMenu, menu);
+                weekBenefit += getWeekBenefit(weekDayYN, orderMenu, orderMenus.get(orderMenu), menu);
             }
         }
 
@@ -67,14 +67,14 @@ public class Benefit {
         return weekBenefit;
     }
 
-    private int getWeekBenefit(boolean weekDayYN, String orderMenu, Menu menu) {
+    private int getWeekBenefit(boolean weekDayYN, String orderMenu, Integer orderCount, Menu menu) {
         int weeKBenefit = 0;
         if (weekDayYN && "디저트".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
-            weeKBenefit += WEEK_BENEFIT_AMOUNT;
+            weeKBenefit += WEEK_BENEFIT_AMOUNT * orderCount;
         }
 
         if (!weekDayYN && "메인".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
-            weeKBenefit += WEEK_BENEFIT_AMOUNT;
+            weeKBenefit += WEEK_BENEFIT_AMOUNT * orderCount;
         }
 
         return weeKBenefit;
