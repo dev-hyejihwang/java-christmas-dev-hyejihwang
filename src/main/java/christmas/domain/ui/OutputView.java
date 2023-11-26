@@ -50,7 +50,10 @@ public class OutputView {
 
     public void printTotalBenefitPrice(int totalBenefit) {
         System.out.println("\n<총혜택 금액>");
-        System.out.println("-" + format.format(totalBenefit) + "원");
+        if(totalBenefit > 0){
+            System.out.print("-");
+        }
+        System.out.println(format.format(totalBenefit) + "원");
     }
 
     public void printExpectPrice(int expectPrice) {
