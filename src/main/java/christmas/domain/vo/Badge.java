@@ -3,9 +3,9 @@ package christmas.domain.vo;
 public enum Badge {
 
     NONE("없음", 0),
-    STAR("별", 5000),
-    TREE("트리", 10000),
-    SANTA("산타", 20000);
+    STAR("별", 5_000),
+    TREE("트리", 10_000),
+    SANTA("산타", 20_000);
 
     private final String name;
     private final int price;

@@ -1,6 +1,7 @@
 package christmas.domain.biz;
 
 import christmas.domain.ui.OutputView;
+import christmas.domain.vo.Menu;
 
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -8,8 +9,8 @@ import java.util.Map;
 public class Benefit {
 
     private static final int WEEK_BENEFIT_AMOUNT = 2023;
-    private static final int SPECIAL_BENEFIT_AMOUNT = 1000;
-    private static final int GIFT_BENEFIT_AMOUNT = 120000;
+    private static final int SPECIAL_BENEFIT_AMOUNT = 1_000;
+    private static final int GIFT_BENEFIT_AMOUNT = 120_000;
     private final Event event = new Event();
     private final OutputView outputView = new OutputView();
     private final DecimalFormat format = new DecimalFormat("###,###");

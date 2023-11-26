@@ -2,6 +2,7 @@ package christmas.domain.biz;
 
 import christmas.domain.exception.DomainException;
 import christmas.domain.ui.InputView;
+import christmas.domain.vo.Menu;
 
 import java.util.Arrays;
 import java.util.HashMap;
