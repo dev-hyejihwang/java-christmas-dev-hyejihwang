@@ -1,11 +1,16 @@
 package christmas.domain.biz;
 
 import christmas.domain.ui.OutputView;
+import christmas.domain.vo.Menu;
 
 import java.text.DecimalFormat;
 import java.util.Map;
 
 public class Benefit {
+
+    private static final int WEEK_BENEFIT_AMOUNT = 2023;
+    private static final int SPECIAL_BENEFIT_AMOUNT = 1_000;
+    private static final int GIFT_BENEFIT_AMOUNT = 120_000;
     private final Event event = new Event();
     private final OutputView outputView = new OutputView();
     private final DecimalFormat format = new DecimalFormat("###,###");
@@ -28,9 +33,9 @@ public class Benefit {
         int totalBenefit = 0;
 
         System.out.println("<혜택 내역>");
-        totalBenefit += printDDayEvent(visitDate, totalBenefit);
-        totalBenefit += printWeekDayEvent(orderMenus, visitDate, totalBenefit);
-        totalBenefit += printSpecialDayEvent(visitDate, totalBenefit);
+        totalBenefit += printDDayEvent(visitDate);
+        totalBenefit += printWeekDayEvent(orderMenus, visitDate);
+        totalBenefit += printSpecialDayEvent(visitDate);
 
         if (totalBenefit < 1) {
             System.out.println("없음");
@@ -39,59 +44,55 @@ public class Benefit {
         return totalBenefit;
     }
 
-    private int printDDayEvent(int visitDate, int totalBenefit) {
+    private int printDDayEvent(int visitDate) {
         int dDayBenefit = event.checkDDayEvent(visitDate);
         if (dDayBenefit > 0) {
-            totalBenefit += dDayBenefit;
             System.out.println("크리스마스 디데이 할인: -" + format.format(dDayBenefit) + "원");
         }
-        return totalBenefit;
+        return dDayBenefit;
     }
 
-    private int printWeekDayEvent(Map<String, Integer> orderMenus, int visitDate, int totalBenefit) {
+    private int printWeekDayEvent(Map<String, Integer> orderMenus, int visitDate) {
         boolean weekDayYN = event.checkWeekDayEvent(visitDate);
         int weekBenefit = 0;
         for (String orderMenu : orderMenus.keySet()) {
             for (Menu menu : Menu.values()) {
-                weekBenefit = getWeekBenefit(weekDayYN, orderMenu, menu);
+                weekBenefit += getWeekBenefit(weekDayYN, orderMenu, orderMenus.get(orderMenu), menu);
             }
         }
 
         if (weekBenefit > 0) {
-            totalBenefit += weekBenefit;
             outputView.printWeekBenefitPrice(weekDayYN, weekBenefit);
         }
 
-        return totalBenefit;
+        return weekBenefit;
     }
 
-    private int getWeekBenefit(boolean weekDayYN, String orderMenu, Menu menu) {
+    private int getWeekBenefit(boolean weekDayYN, String orderMenu, Integer orderCount, Menu menu) {
         int weeKBenefit = 0;
-        if (weekDayYN) {
-            if ("디저트".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
-                weeKBenefit += 2023;
-            }
-            return weeKBenefit;
+        if (weekDayYN && "디저트".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
+            weeKBenefit += WEEK_BENEFIT_AMOUNT * orderCount;
         }
 
-        if ("메인".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
-            weeKBenefit += 2023;
+        if (!weekDayYN && "메인".equals(menu.getTypeName()) && orderMenu.equals(menu.getMenuName())) {
+            weeKBenefit += WEEK_BENEFIT_AMOUNT * orderCount;
         }
+
         return weeKBenefit;
     }
 
-    private int printSpecialDayEvent(int visitDate, int totalBenefit) {
+    private int printSpecialDayEvent(int visitDate) {
         boolean specialDayYN = event.checkSpecialDayEvent(visitDate);
         if (specialDayYN) {
-            totalBenefit += 1000;
             System.out.println("특별 할인: -1,000원");
+            return SPECIAL_BENEFIT_AMOUNT;
         }
-        return totalBenefit;
+        return 0;
     }
 
     private int printGiftPrice(int orderPrice) {
         int giftPrice = 0;
-        if (orderPrice > 120000) {
+        if (orderPrice > GIFT_BENEFIT_AMOUNT) {
             System.out.println("증정 이벤트: -25,000원");
             return giftPrice;
         }

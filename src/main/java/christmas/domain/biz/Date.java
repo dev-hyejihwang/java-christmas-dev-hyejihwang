@@ -1,8 +1,16 @@
 package christmas.domain.biz;
 
+import christmas.domain.exception.DomainException;
 import christmas.domain.ui.InputView;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 public class Date {
+
+    private static final int YEAR = 2023;
+    private static final int MONTH = 12;
+
     public int getDate() {
         InputView inputView = new InputView();
         int date;
@@ -13,14 +21,16 @@ public class Date {
                 validateDate(date);
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+                System.out.println(DomainException.getExceptionMessage("INVALID_DATE"));
             }
         }
         return date;
     }
 
     private static void validateDate(int date) {
-        if (date < 1 || date > 31) {
+        try{
+            LocalDate.of(YEAR, MONTH, date);
+        }catch (DateTimeException e){
             throw new IllegalArgumentException();
         }
     }

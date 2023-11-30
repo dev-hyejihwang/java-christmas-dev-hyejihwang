@@ -40,7 +40,6 @@ public class Application {
         Benefit benefit = new Benefit();
         int totalBenefit = benefit.process(orderMenus, visitDate);
 
-        Badge badge = new Badge();
-        badge.giveBadge(totalBenefit);
+        outputView.printBadge(totalBenefit);
     }
 }
